@@ -9,46 +9,56 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct StoriesView: View {
-    @ObservedObject var viewModel = StoriesViewModel()
+    @StateObject private var viewModel = StoriesViewModel()
+    @State private var isLoading = false
+    @State private var errorMessage: String?
     
     var body: some View {
         List(viewModel.storyPosts) { storyPost in
-            ZStack {
-                WebImage(url: storyPost.imageURL)  { image in
-                    image.resizable(capInsets: .init(top: 0, leading: 0, bottom: 0, trailing: 0), resizingMode: .stretch)
-                } placeholder: {
-                    Rectangle().foregroundColor(.gray)
-                }
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-73)
-
-                VStack() {
-                    Text("test")
-                        .multilineTextAlignment(.leading)
-                        .font(.caption)
-                        .foregroundColor(.primary)
-                    
-                    Spacer()
-
-                    Text(storyPost.content)
-                        .multilineTextAlignment(.leading)
-                        .font(.caption)
-                        .foregroundColor(.primary)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.init(top: 16, leading: 16, bottom: 60, trailing: 16))
-            }
+            StoryView(storyPost)
+                .listRowSeparator(.hidden)
+                .listRowInsets(EdgeInsets())
         }
-        .padding(0)
-        .contentMargins(0)
-        .background(.black)
         .listStyle(PlainListStyle())
-        .listSectionSeparator(.hidden)
-        .listRowSeparator(.hidden)
+        .overlay(
+            Group {
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .scaleEffect(1.5)
+                }
+            }
+        )
+        .alert("Error", isPresented: .constant(errorMessage != nil)) {
+            Button("OK") {
+                errorMessage = nil
+            }
+        } message: {
+            Text(errorMessage ?? "")
+        }
         .onAppear {
-            Task {
-                do {
-                    try await viewModel.fetchStoryPosts(after: 0)
+            loadStoryPosts()
+        }
+        .padding(.top, 1)
+        .background(.black)
+    }
+    
+    private func loadStoryPosts() {
+        guard !isLoading else { return }
+        
+        isLoading = true
+        errorMessage = nil
+        
+        Task {
+            do {
+                try await viewModel.fetchStoryPosts(after: 0)
+                await MainActor.run {
+                    isLoading = false
+                }
+            } catch {
+                await MainActor.run {
+                    isLoading = false
+                    errorMessage = error.localizedDescription
                 }
             }
         }
@@ -56,5 +66,5 @@ struct StoriesView: View {
 }
 
 #Preview {
-    StoriesView().environmentObject(StoriesViewModel())
+    StoriesView()
 }
