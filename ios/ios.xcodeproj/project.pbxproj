@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F3CBA1D32E1EC3610095A3C8 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F3CBA1D22E1EC3610095A3C8 /* SDWebImageSwiftUI */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F3CBA17F2E1EAAF40095A3C8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3CBA1D32E1EC3610095A3C8 /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = ios;
 			packageProductDependencies = (
+				F3CBA1D22E1EC3610095A3C8 /* SDWebImageSwiftUI */,
 			);
 			productName = ios;
 			productReference = F3CBA16F2E1EAAF30095A3C8 /* ios.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = F3CBA1662E1EAAF30095A3C8;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F3CBA1D12E1EC3610095A3C8 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F3CBA1702E1EAAF30095A3C8 /* Products */;
 			projectDirPath = "";
@@ -558,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F3CBA1D12E1EC3610095A3C8 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F3CBA1D22E1EC3610095A3C8 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3CBA1D12E1EC3610095A3C8 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F3CBA1672E1EAAF30095A3C8 /* Project object */;
 }
