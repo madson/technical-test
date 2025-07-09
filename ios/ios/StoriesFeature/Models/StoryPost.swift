@@ -13,9 +13,11 @@ struct StoryPost: Codable, Identifiable {
     let content: String
     let imageURL: URL
     let timestamp: Int
-    let likesCount: Int
-    let commentsCount: Int
-    
+    let likesCount: Int?
+    let commentsCount: Int?
+    let sharesCount: Int?
+    var user: User? = nil
+
     enum CodingKeys: String, CodingKey {
         case id
         case userId = "user_id"
@@ -24,5 +26,6 @@ struct StoryPost: Codable, Identifiable {
         case timestamp
         case likesCount = "likes_count"
         case commentsCount = "comments_count"
+        case sharesCount = "shares_count"
     }
 }
