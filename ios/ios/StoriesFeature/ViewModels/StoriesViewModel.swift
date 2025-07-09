@@ -15,7 +15,15 @@ final class StoriesViewModel: ObservableObject {
     func fetchStoryPosts(after timestamp: Int) async throws {
         do {
             let storyPosts = try await storyPostRepository.fetchStoryPosts(after: timestamp)
-            self.storyPosts.append(contentsOf: storyPosts)
+            let users = try await UserRepository().fetchUsers()
+            let storyPostsCopy = storyPosts.map { story in
+                var local = story
+                local.user = users.first(where: { story.id == $0.id })
+                return local
+            }
+            await MainActor.run {
+                self.storyPosts.append(contentsOf: storyPostsCopy)
+            }
         } catch {
             throw error
         }
