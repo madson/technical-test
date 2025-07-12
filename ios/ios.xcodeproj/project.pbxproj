@@ -203,6 +203,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				F3CBA1D12E1EC3610095A3C8 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				F324AEE62E22789E00142D2A /* XCRemoteSwiftPackageReference "Inject" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F3CBA1702E1EAAF30095A3C8 /* Products */;
@@ -569,6 +570,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F324AEE62E22789E00142D2A /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.5.2;
+			};
+		};
 		F3CBA1D12E1EC3610095A3C8 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
